@@ -305,7 +305,7 @@ def main():
     # else:
     #     env = gym.make(env_name)
 
-    env = h_env.HockeyEnv(mode=h_env.HockeyEnv.TRAIN_DEFENSE)
+    env = h_env.HockeyEnv(mode=h_env.HockeyEnv.TRAIN_Shooting)
 
     render = False
     log_interval = 20           # print avg reward in the interval
