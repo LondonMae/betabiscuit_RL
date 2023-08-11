@@ -6,11 +6,11 @@ import numpy as np
 import itertools
 import time
 import torch
-import pylab as plt
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
+# import pylab as plt
+# from mpl_toolkits.mplot3d import Axes3D
+# from matplotlib import cm
 import laserhockey.hockey_env as h_env
-import wandb
+# import wandb
 import memory as mem
 from feedforward import Feedforward
 from feedforward import DuelingDQN
@@ -365,7 +365,8 @@ def training(ddqn=False, exploration=False, wandb_track=False, load_model = None
                         wandb = wandb_track, load_model = load_model, dueling = dueling, beta = beta)
 
     if load_model is not None:
-        q_agent.Q.load_state_dict(torch.load(load_model).state_dict())
+        q_agent.Q.load_state_dict(torch.load(load_model))
+        print(torch.load(load_model))
         stats = np.load('test.npy').tolist()
 
     print(q_agent.get_config())
@@ -373,7 +374,7 @@ def training(ddqn=False, exploration=False, wandb_track=False, load_model = None
 
     ob,_info = env.reset()
 
-    max_episodes=50000
+    max_episodes=0
     max_steps=50
     avg_total_reward = 0
     for i in range(max_episodes):
@@ -430,7 +431,7 @@ def training(ddqn=False, exploration=False, wandb_track=False, load_model = None
 
     if save_model is not None:
         np.save('test.npy', stats)
-        torch.save(q_agent.Q, save_model)
+        torch.save(q_agent.Q.state_dict(), save_model)
 
     print(q_agent.get_config())
 
@@ -504,12 +505,12 @@ def run(model, env_name="hockey"):
 def main():
     # fig=plt.figure(figsize=(6,3.8))
     # # run(dueling = True, ddqn = True, exploration= True, wandb_track = False)
-    # training(dueling = False, ddqn = False, exploration= False, save_model="test_basic", wandb_track =True, hard_updates=False, tau = .001, discount = .95)
+    training(dueling = True, ddqn = False, exploration= True, load_model="BEST_dict", save_model="BEST_dict", wandb_track =False, hard_updates=False, tau = .001, discount = .95)
     # # run(ddqn = False, exploration= False, wandb_track = False)
     # run(ddqn = False, exploration= True, wandb_track = False)
     # plt.show()
 
-    run("BEST")
+    # run("BEST")
 
 
 
