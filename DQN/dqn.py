@@ -505,7 +505,7 @@ def run(model, env_name="hockey"):
 def main():
     # fig=plt.figure(figsize=(6,3.8))
     # # run(dueling = True, ddqn = True, exploration= True, wandb_track = False)
-    training(dueling = True, ddqn = False, exploration= True, load_model="BEST_dict", save_model="BEST_dict", wandb_track =False, hard_updates=False, tau = .001, discount = .95)
+    training(dueling = True, ddqn = False, exploration= True, load_model = "BEST_dict",save_model="BEST_dict", wandb_track =False, hard_updates=False, tau = .001, discount = .95)
     # # run(ddqn = False, exploration= False, wandb_track = False)
     # run(ddqn = False, exploration= True, wandb_track = False)
     # plt.show()
